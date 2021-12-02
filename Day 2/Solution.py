@@ -1,0 +1,51 @@
+from enum import Enum
+
+class CommandType(str, Enum):
+    Forward = 'forward'
+    Down    = 'down'
+    Up      = 'up'
+
+class Solution:
+
+    def __init__(self, fileLocation):
+
+        # read in commands/directions
+        input = open(fileLocation)
+        instructions = [line.split() for line in input.readlines()]
+        self.commands = [(command, int(value)) for command, value in instructions]
+
+    def NavigatePart1(self):
+
+        distance = 0
+        depth = 0
+        
+        for command, value in self.commands:
+            if command == CommandType.Forward:
+                distance += value
+            elif command == CommandType.Up:
+                depth -= value
+            elif command == CommandType.Down:
+                depth += value
+        
+        return distance * depth
+
+    def NavigatePart2(self):
+
+        distance = 0
+        depth = 0
+        aim = 0
+        
+        for command, value in self.commands:
+            if command == CommandType.Forward:
+                distance += value
+                depth += value * aim
+            elif command == CommandType.Up:
+                aim -= value
+            elif command == CommandType.Down:
+                aim += value
+        
+        return distance * depth
+
+solution = Solution("input.txt")
+print(solution.NavigatePart1())
+print(solution.NavigatePart2())
