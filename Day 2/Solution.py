@@ -1,4 +1,5 @@
 from enum import Enum
+from typing import Match
 
 class CommandType(str, Enum):
     Forward = 'forward'
@@ -18,14 +19,18 @@ class Solution:
 
         distance = 0
         depth = 0
+
+        # 1746616
+        # 1741971043
         
         for command, value in self.commands:
-            if command == CommandType.Forward:
-                distance += value
-            elif command == CommandType.Up:
-                depth -= value
-            elif command == CommandType.Down:
-                depth += value
+            match command:
+                case CommandType.Forward:
+                    distance += value
+                case CommandType.Up:
+                    depth -= value
+                case CommandType.Down:
+                    depth += value
         
         return distance * depth
 
@@ -36,13 +41,14 @@ class Solution:
         aim = 0
         
         for command, value in self.commands:
-            if command == CommandType.Forward:
-                distance += value
-                depth += value * aim
-            elif command == CommandType.Up:
-                aim -= value
-            elif command == CommandType.Down:
-                aim += value
+            match command:
+                case CommandType.Forward:
+                    distance += value
+                    depth += value * aim
+                case CommandType.Up:
+                    aim -= value
+                case CommandType.Down:
+                    aim += value
         
         return distance * depth
 
