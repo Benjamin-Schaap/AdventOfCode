@@ -8,11 +8,11 @@ import (
 	"strings"
 )
 
-func LoadInput(fileName string) []map[string]int {
+func LoadInput(fileName string) ([]map[string]int, error) {
 
 	file, err := os.Open(fileName)
 	if err != nil {
-		fmt.Errorf("Error reading in file %w", err)
+		return nil, fmt.Errorf("Error reading in file %w", err)
 	}
 
 	defer file.Close()
@@ -39,7 +39,7 @@ func LoadInput(fileName string) []map[string]int {
 		tempMap := map[string]int{command: value}
 		input = append(input, tempMap)
 	}
-	return input
+	return input, nil
 }
 
 func NavigationPart1(input *[]map[string]int) int {
@@ -89,7 +89,7 @@ func NavigationPart2(input *[]map[string]int) int {
 
 func main() {
 
-	input := LoadInput("input.txt")
+	input, _ := LoadInput("input.txt")
 
 	fmt.Println(NavigationPart1(&input))
 	fmt.Println(NavigationPart2(&input))
