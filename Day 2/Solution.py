@@ -19,9 +19,6 @@ class Solution:
 
         distance = 0
         depth = 0
-
-        # 1746616
-        # 1741971043
         
         for command, value in self.commands:
             match command:
