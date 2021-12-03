@@ -1,5 +1,4 @@
 from enum import Enum
-from typing import Match
 
 class CommandType(str, Enum):
     Forward = 'forward'
