@@ -79,7 +79,7 @@ class Bingo():
     
     def WinningBingoScorePt1(self):
 
-        fastestWin = float('inf') # fastestWin is the number if picks before the game was won. 
+        fastestWin = float('inf') # fastestWin is the number of picks before the game was won. 
         fastestBoardIndex = None
         lastChoiceFastestBoard = None
 
