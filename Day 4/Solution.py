@@ -32,7 +32,7 @@ class Bingo():
                 else:
                     self.boards[dictionary_key].append(row)
 
-    def isWinningRowChoice(self, boardNumber, rowIndex, columnIndex):
+    def isWinningChoice(self, boardNumber, rowIndex, columnIndex):
 
         rowCheck = self.boards[boardNumber][rowIndex]
 
@@ -77,7 +77,7 @@ class Bingo():
 
         print("Result: ", int(lastPick) * unmarkedSum)
     
-    def WinningBingoScorePt1(self):
+    def WinningBingoScore(self):
 
         fastestWin = float('inf') # fastestWin is the number of picks before the game was won. 
         fastestBoardIndex = None
@@ -92,7 +92,6 @@ class Bingo():
             for numberCalledIndex in range(len(self.picks)):
 
                 numberCalled = self.picks[numberCalledIndex]
-
             
                 # runtime is not great on this method due to the fact that we access every element in every board. This could be sped up to cancel out of the board the second it wins.
                 # big O runtime is still O(B * M * N) with M being the rows, N being the columns, and B being the number of boards.
@@ -100,14 +99,13 @@ class Bingo():
 
                     for colIndex in range(len(board[0])):
 
-
                         if not doneCounting:
                             if board[rowIndex][colIndex][0] == str(numberCalled):
                                 lastChoice = numberCalled
 
                                 board[rowIndex][colIndex] = (lastChoice, True)
 
-                                if self.isWinningRowChoice(boardNumber, rowIndex, colIndex):
+                                if self.isWinningChoice(boardNumber, rowIndex, colIndex):
 
                                     # stop counting for this particular board number, we just found the best option for it
                                     doneCounting = True
@@ -119,6 +117,7 @@ class Bingo():
                                         fastestBoardIndex = boardNumber
                                         lastChoiceFastestBoard = lastChoice
                 picks += 1
+        
         print(" - - - - - - - - - - - - - - - - - - - - -")
         print("Winning Board")
         print("FastestBoardIndex: ", fastestBoardIndex + 1)
@@ -126,7 +125,7 @@ class Bingo():
         print("Last choice: ", lastChoiceFastestBoard)
         self.CalculateBoardScore(fastestBoardIndex, lastChoiceFastestBoard)
 
-    def LosingBingo(self):
+    def LosingBingoScore(self):
         print(" - - - - - - - - - - - - - - - - - - - - -")
         print("Losing Board")
 
@@ -143,5 +142,5 @@ class Bingo():
 
 bingo_game = Bingo()
 bingo_game.LoadData("input.txt")
-bingo_game.WinningBingoScorePt1()
-bingo_game.LosingBingo()
+bingo_game.WinningBingoScore()
+bingo_game.LosingBingoScore()
