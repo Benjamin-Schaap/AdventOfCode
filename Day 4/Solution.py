@@ -130,7 +130,7 @@ class Bingo():
         print(" - - - - - - - - - - - - - - - - - - - - -")
         print("Losing Board")
 
-        # building off of our caching in part one, simple get the largest element in the list, which we will convert to a max heap.
+        # building off of our caching in part one, simply get the largest element in the list, which we will convert to a max heap.
         # use the 'picks' field to get the worst win
         # self.board_scores.append((picks, boardNumber, lastChoice))
         worstWin = nlargest(1, self.board_scores, key=itemgetter(0))
